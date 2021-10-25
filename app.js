@@ -35,16 +35,15 @@ catch (err) {
   console.log("Could not connect to the DB");
 }
 
-const authRoute = require('./routes/authRoute');
-const profile = require('./routes/ChileProfileRoute');
+const authRoute = require('./routes/v1/authRoute.js');
+const profile = require('./routes/v1/ChileProfileRoute');
 
 
 //ADDING THE NEEDED MIDDLEWARE
+
 app.use(morgan('dev'));
 app.use('/auth', authRoute);
 app.use('/profile', profile);
-
-
 
 
 app.get('/', (req, res) => {

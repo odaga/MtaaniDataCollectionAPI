@@ -2,22 +2,23 @@ const express  = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const httpStatus = require('http-status');
 
 
-const Child = require('../models/Child');
+const Child = require('../../models/Child');
 
 
 //CREATEA NEW CHILD PROFILE
 router.post('/', (req, res) => {
     try{
-        res.status(201).json({
+        res.status(httpStatus.CREATED).json({
             message: "profile created successfully",
 
         });
     }
     catch(err) {
         console.log(err);
-                res.status(500).json({
+                res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
                     error: error.message
                 });
     }
@@ -27,12 +28,12 @@ router.post('/', (req, res) => {
 router.get('/:id', (req, res) => {
     try {
         if (req.params.id) {
-            res.status(201).json({
+            res.status(httpStatus.CREATED).json({
                 message: "profile with id found"
             });
         }
         else {
-            res.status(404).json({
+            res.status(httpStatus.NOT_FOUND).json({
                 message: "profile not found"
             });
         }
@@ -41,3 +42,5 @@ router.get('/:id', (req, res) => {
         console.log(err);
     }
 });
+
+module.exports = router;

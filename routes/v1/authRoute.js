@@ -1,18 +1,24 @@
-const express  = require('express');
+const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const mongoose = require("mongoose");
+router.use(bodyParser.urlencoded({extended:true}));
+router.use(bodyParser.json());
+const httpStatus = require('http-status');
+
+
 
 
 //Register a new user
 router.post('/register', (req, res) => {
     try {
         if (req.body.email && req.body.password) {
-            res.status(201).json({
+            res.status(httpStatus.CREATED).json({
                 message: "user created successfullys"
             });
         } 
         else {
-            res.status(400). json({
+            res.status(httpStatus.NOT_FOUND). json({
                 message: "email and password are required"
             })
         }
@@ -29,12 +35,12 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
     try {
         if (req.body.email && req.body.password) {
-            res.status(201).json({
+            res.status(httpStatus.CREATED).json({
                 message: "Login successful"
             });
         } 
         else {
-            res.status(400). json({
+            res.status(httpStatus.CONFLICT). json({
                 message: "email and password are required"
             })
         }
@@ -53,3 +59,5 @@ router.post('/login', (req, res) => {
     //3. if  an acount exists send email with activation link/token/key
 
 //Verify the password reset token/link
+
+module.exports = router;
