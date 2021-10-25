@@ -1,7 +1,6 @@
 const express  = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 
 
 //Register a new user
@@ -46,3 +45,11 @@ router.post('/login', (req, res) => {
         });
     }
 });
+
+//Password reset enpoint
+//TODO
+    //1. get the email and check if there is an account with this email
+    //2. if an account does not exist, reset client message with 404
+    //3. if  an acount exists send email with activation link/token/key
+
+//Verify the password reset token/link
